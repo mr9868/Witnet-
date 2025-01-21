@@ -79,7 +79,7 @@ function witnetInstall(){
    docker run -d --name witnet${1}_node \
       --volume ~/.witnet:/.witnet \
       --publish 2133${1}:2133${1} \
-      --restart always witnet/witnet-rust:2.0.0-rc.8 \
+      --restart always witnet/witnet-rust:2.0.0-rc.9 \
       -c /tmp/testnet-1/witnet.toml node server
 }
 
