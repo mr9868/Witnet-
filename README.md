@@ -18,7 +18,8 @@ Witnet testnet party
 > ```
 
 
-> [!TIPS]
+
+> [!TIP]
 > Another transaction
 >
 > Get auth token :
