@@ -16,5 +16,5 @@ function witnetInstall(){
    -l org.opencontainers.image.version='22.04' \
    -e 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' \
    -e 'RUST_BACKTRACE=full' \
-   -d --entrypoint "./runner.sh" witnet/witnet-rust:2.0.0-rc.8 '-c' '/tmp/testnet-1/witnet.toml' 'node' 'server' '--master-key-import' '/witnet/privKey${totalCont}.txt'
+   -d --entrypoint "./runner.sh" witnet/witnet-rust:2.0.0-rc.9 '-c' '/tmp/testnet-1/witnet.toml' 'node' 'server' '--master-key-import' '/witnet/privKey${totalCont}.txt'
 }
