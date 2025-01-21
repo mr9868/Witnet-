@@ -2,9 +2,9 @@
 #Gihub: https/www.github.com/mr9868
 
 #required dependencies
-command -v docker >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install docker.io docker -y }
-command -v jq >/dev/null 2>&1 || { echo >&2 "Installing jq ..."; sudo apt install jq -y }
-command -v lolcat >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install lolcat -y }
+sudo command -v sudo docker >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install docker.io docker -y }
+sudo command -v sudo jq >/dev/null 2>&1 || { echo >&2 "Installing jq ..."; sudo apt install jq -y }
+sudo command -v sudo lolcat >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install lolcat -y }
 
 
 
@@ -79,7 +79,7 @@ totalCont=${#listCont[@};
 
 #install witnet
 function witnetInstall(){
-   docker run -d --name witnet${totalCont}_node \
+  sudo docker run -d --name witnet${totalCont}_node \
       --volume ~/.witnet:/.witnet \
       --publish 2133${totalCont}:2133${totalCont} \
       --restart always witnet/witnet-rust:2.0.0-rc.9 \
@@ -89,6 +89,6 @@ function witnetInstall(){
 listCommand="List command :\n 1. witnetd $(( 1+ ${totalCont} )) nodeStats\n\
              2. witnetd $(( 1+ ${totalCont} )) balance\n\
              3. witnetd $(( 1+ ${totalCont} )) reputation"
-
+echo -e "Finished !\n$listCommand”;
 
 
