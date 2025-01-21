@@ -1,0 +1,2 @@
+# Witnet-
+Witnet testnet party
