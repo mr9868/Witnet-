@@ -30,7 +30,7 @@ Witnet testnet party
 
 
 > [!TIP]
-> *Another transaction*
+> ## *Another transaction*
 >
 > Get auth token :
 > ```
