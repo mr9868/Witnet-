@@ -74,151 +74,21 @@ fi \
 ' >> ~/.bashrc
 fi
 
+listCont=($( docker ps -a | awk '{print $NF}' | grep witnet ));
+totalCont=${#listCont[@};
+
 #install witnet
 function witnetInstall(){
-   docker run -d --name witnet${1}_node \
+   docker run -d --name witnet${totalCont}_node \
       --volume ~/.witnet:/.witnet \
-      --publish 2133${1}:2133${1} \
+      --publish 2133${totalCont}:2133${totalCont} \
       --restart always witnet/witnet-rust:2.0.0-rc.9 \
       -c /tmp/testnet-1/witnet.toml node server
 }
 
-listCont=($( docker ps -a | awk '{print $NF}' | grep witnet ));
-totalCont=${#listCont[@};
-listCommand="List command :#WIT installed by mr9868
-#Gihub: https/www.github.com/mr9868
-
-#required dependencies
-command -v docker >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install docker.io docker -y }
-command -v jq >/dev/null 2>&1 || { echo >&2 "Installing jq ..."; sudo apt install jq -y }
-command -v lolcat >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install lolcat -y }
-
-
-
-#Export variable
-checkWitFunc=$( grep -w "witnetd" ~/.bashrc );
-if [ -z $checkWitFunc ];
-then
-
-echo ' \
-listCont=($( docker ps -a | awk \'{print $NF}\' | grep witnet )); \
-for i in \$( seq  0 42); \
-do \
-samaDgn+="="; \
-buka="\${samaDgn}( OUTPUT )\${samaDgn}" \
-tutup="\${samaDgn}==========\${samaDgn}" \
-done \
- \
- \
-witnetd(){ \
-for i in \$( seq 1 \${#listCont[@]} ); \
-do \
-if [ \$1 == "\${i}" ]; \
-then \
-cont=\${listCont[\$((i-1))]}; \
-twitAddr=\$( witnetd_cli  address | grep twit | head -1 ); \
-echo \$buka; \
-witnetd_cli \${@:2} \
-fi \
-done\
-if [[ ! "\$1" =~ ^[1-9]{1}+\$ ]]; \
-then \
-listWitnet; \
-echo \$buka; \
-witnetd_cli \${@:1} \
-fi \
-} \
-
-listWitnet(){ \
-echo "===List Container===" \
-for i in \$( seq 1 \${#listCont[@]} ); \
-do \                                                                                                                    echo "\${i}. \${listCont[\$((i -1))]}"
-#declare cont\${i}=\${listCont[\$((i-1))]}; \
-done \
-read -p "Choose container : " cont \
-for i in \$( seq 1 \${#listCont[@]} ); \
-do \
-if [ \$cont == \${i} ]; \
-then \
-cont=\${listCont[\$((i-1))]}; \
-twitAddr=\$( witnetd_cli  address | grep twit | head -1 ); \
-fi \
-done \
-} \
- \
-witnetd_cli(){ \
-if [ \$1 == "remove" ]; \
-then \
-sudo docker stop \$cont && docker rm \$cont && rm -rf ~/.witnet/storage \
-elif [ \$1 == "logs" ]; \
-then \
-sudo docker logs -f \$cont; \
-else \
-sudo docker exec \$cont /tmp/witnet-raw -c /tmp/testnet-1/witnet.toml node \${@:1} 2>/dev/null \
-echo \$tutup \
-fi \
-} \
-' >> ~/.bashrc
-fi
-
-#install witnet
-function witnetInstall(){
-   docker run -d --name witnet${1}_node \
-      --volume ~/.witnet:/.witnet \
-      --publish 2133${1}:2133${1} \
-      --restart always witnet/witnet-rust:2.0.0-rc.9 \
-      -c /tmp/testnet-1/witnet.toml node server
-}
-
-listCont=($( docker ps -a | awk '{print $NF}' | grep witnet ));
-totalCont=${#listCont[@};
-listCommand="List command :\n 1. witnetd ${1} nodeStats\n\
-             2. witnetd ${1} balance\n\
-             3. witnetd ${1} reputation"
-
-if [ -z $listCont ];
-then
-    echo "Installing ..."
-    sleep 3;
-    witnetInstall 1;
-    echo "Install finished !";
-    echo -e $listCommand 1;
-    echo;
-    sleep 3;
-else
-    echo "installing ..."
-    sleep 3;
-    witnetInstall $totalCont;
-    echo "Install finished"
-    echo -e $listCommand $totalCont;
-    echo;
-    sleep 3;
-fi
-
-
-
-\n 1. witnetd ${1} nodeStats\n\
-             2. witnetd ${1} balance\n\
-             3. witnetd ${1} reputation"
-
-if [ -z $listCont ];
-then
-    echo "Installing ..."
-    sleep 3;
-    witnetInstall 1;
-    echo "Install finished !";
-    echo -e $listCommand 1;
-    echo;
-    sleep 3;
-else
-    echo "installing ..."
-    sleep 3;
-    witnetInstall $totalCont;
-    echo "Install finished"
-    echo -e $listCommand $totalCont;
-    echo;
-    sleep 3;
-fi
+listCommand="List command :\n 1. witnetd $(( 1+ ${totalCont} )) nodeStats\n\
+             2. witnetd $(( 1+ ${totalCont} )) balance\n\
+             3. witnetd $(( 1+ ${totalCont} )) reputation"
 
 
 
