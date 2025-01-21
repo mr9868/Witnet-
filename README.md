@@ -3,6 +3,7 @@ Witnet testnet party
 
 > [!IMPORTANT]
 > Install witnet docker container:
+> Warning ! Do this for first time only, you must export your private key to continue run the node. See export masterKey sesion below !
 > ```
 > cd;
 > git clone https://github.com/mr9868/witnet;
@@ -15,6 +16,12 @@ Witnet testnet party
 > cd ~/witnet;
 > chmod +x tx.sh
 > ./tx.sh;
+> ```
+> > Import witnet node :
+> ```
+> cd ~/witnet;
+> chmod +x import_node.sh
+> ./import_node.sh;
 > ```
 
 
