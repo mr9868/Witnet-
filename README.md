@@ -9,6 +9,7 @@ Witnet testnet party
 > git clone https://github.com/mr9868/witnet;
 > cd witnet;
 > chmod +x wit_installer.sh;
+> exec bash;
 > ```
 > 
 > Run daily transaction witnet:
@@ -22,6 +23,7 @@ Witnet testnet party
 > cd ~/witnet;
 > chmod +x import_node.sh
 > ./import_node.sh;
+> exec bash;
 > ```
 
 
