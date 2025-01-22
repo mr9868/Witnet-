@@ -79,7 +79,7 @@ totalCont=${#listCont[@]};
 function witnetInstall(){
 command sudo docker run -d --name witnet${totalCont}_node \
       --volume ~/.witnet:/.witnet \
-      --publish 2133${totalCont}:2133${totalCont} \
+      --publish $((21337 + $totalCont )):$(( 21337 + $totalCont )) \
       --restart always witnet/witnet-rust:2.0.0-rc.9 \
       -c /tmp/testnet-1/witnet.toml node server
 }
