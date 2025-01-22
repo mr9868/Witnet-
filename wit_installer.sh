@@ -86,7 +86,7 @@ command sudo docker run -d --name witnet${totalCont}_node \
 witnetInstall
 listCommand="List command :\n 1. witnetd ${totalCont} nodeStats\n 
              2. witnetd ${totalCont} balance\n 
-             3. witnetd $totalCont} reputation" 
-echo -e "Finished \n$listCommand ";
+             3. witnetd ${totalCont} reputation" 
+echo -e "Finished \n${listCommand} ";
 
 
