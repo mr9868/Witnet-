@@ -1,4 +1,4 @@
-
+userSource=~/.bashrc;
 #WIT installed by mr9868
 #Gihub: https/www.github.com/mr9868
 
@@ -10,7 +10,7 @@ command -v sudo lolcat >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; su
 
 
 #Export variable
-checkWitFunc=$( grep -w "witnetd" ~/.bashrc );
+checkWitFunc=$( grep -w "witnetd" $userSource );
 if [ -z $checkWitFunc ];
 then
     echo "
@@ -69,7 +69,7 @@ command sudo docker exec \$cont /tmp/witnet-raw -c /tmp/testnet-1/witnet.toml no
 echo \$tutup
 fi
 }
-" >> .bashrc
+" >> $userSource
 
 listCont=($( command sudo docker ps -a | awk '{print $NF}' | grep witnet ));
 totalCont=${#listCont[@};
