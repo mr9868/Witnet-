@@ -99,10 +99,11 @@ totalCont=${#listCont[@]};
 function witnetInstall(){
 command sudo docker run --name witnet$(( 1 + totalCont ))_node \
 	--runtime runc -v /home/user/.witnet:/.witnet \
-    -p $(( 21337 + totalCont )):$(( 21337 + totalCont ))/tcp \
-    --restart always -h 6223e55e2e58 --expose $(( 11212 + totalCont ))/tcp \
-    --expose $(( 21337 + totalCont ))/tcp \
-    --expose $(( 21338 + totalCont ))/tcp \
+    -p $(( 21337 + ${totalCont} )):$(( 21337 + ${totalCont} ))/tcp \
+    --restart always -h ac7785ebf70a \
+    --expose $(( 11212 + ${totalCont} ))/tcp \
+    --expose $(( 21337 + ${totalCont} ))/tcp \
+    --expose $(( 21338 + ${totalCont} ))/tcp \
     -l org.opencontainers.image.ref.name='ubuntu' \
     -l org.opencontainers.image.version='22.04' \
     -e 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' \
