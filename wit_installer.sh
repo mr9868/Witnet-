@@ -67,7 +67,7 @@ sudo docker exec \$cont /tmp/witnet-raw -c /tmp/testnet-1/witnet.toml node \${@:
 echo \$tutup 
 fi 
 } 
-" >.bashrc
+" >> ~/.bashrc
 fi
 
 listCont=($( sudo docker ps -a | awk '{print $NF}' | grep witnet ));
