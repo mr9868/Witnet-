@@ -62,13 +62,19 @@ fi
 witnetd_cli(){
 if [ \$1 == \"remove\" ];
 then
-command sudo docker stop \$cont && command sudo docker rm \$cont && sudo rm -rf ~/.witnet/storage
+command sudo docker stop \$cont;
+echo \" Successfully stop \${cont}\";
+command sudo docker rm \$cont;
+echo \" Successfully remove \${cont}\";
+sudo rm -rf ~/.witnet/storage
+exec bash
 elif [ \$1 == \"logs\" ];
 then
 command sudo docker logs -f \$cont;
 else
 command sudo docker exec \$cont /tmp/witnet-raw -c /tmp/testnet-1/witnet.toml node \${@:1} 2>/dev/null
 echo \$tutup
+exec bash;
 fi
 }
 " >> $userSource
@@ -87,5 +93,6 @@ command sudo docker run -d --name witnet${totalCont}_node \
 witnetInstall
 listCommand="List command :\n 1. witnetd ${totalCont} nodeStats\n2. witnetd ${totalCont} balance\n3. witnetd ${totalCont} reputation" 
 echo -e "Finished ✓\n${listCommand} ";
+exec bash;
 
 
