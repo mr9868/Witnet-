@@ -71,9 +71,9 @@ echo \$tutup
 fi
 }
 " >> $userSource
-
+fi
 listCont=($( command sudo docker ps -a | awk '{print $NF}' | grep witnet ));
-totalCont=${#listCont[@};
+totalCont=${#listCont[@]};
 
 #install witnet
 function witnetInstall(){
