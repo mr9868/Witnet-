@@ -1,4 +1,5 @@
 userSource=~/.bashrc;
+cp ~/.bashrc ~/.bashrc_backup;
 #MR9868
 #WIT installed by mr9868
 #Gihub: https/www.github.com/mr9868
