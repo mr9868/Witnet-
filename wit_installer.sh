@@ -3,9 +3,9 @@
 #Gihub: https/www.github.com/mr9868
 
 #required dependencies
-sudo command -v sudo docker >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install docker.io docker -y; }
-sudo command -v sudo jq >/dev/null 2>&1 || { echo >&2 "Installing jq ..."; sudo apt install jq -y; }
-sudo command -v sudo lolcat >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install lolcat -y; }
+command -v sudo docker >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install docker.io docker -y; }
+command -v sudo jq >/dev/null 2>&1 || { echo >&2 "Installing jq ..."; sudo apt install jq -y; }
+command -v sudo lolcat >/dev/null 2>&1 || { echo >&2 "Installing docker ..."; sudo apt install lolcat -y; }
 
 
 
