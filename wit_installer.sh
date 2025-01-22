@@ -53,6 +53,11 @@ fi
 done
 }
 witnetd(){
+if [ \${#listCont[@]} -gt 0 ];
+then
+echo \"No witnet container name found !\";
+exit 1;
+fi
 for i in \$( seq 1 \${#listCont[@]} );
 do
 if [ \$1 == \"\${i}\" ];
