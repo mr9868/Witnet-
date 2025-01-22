@@ -17,12 +17,23 @@ if [ -z $checkWitFunc ];
 then
     echo "
 listCont=(\$( command sudo docker ps -a | awk '{print \$NF}'| grep witnet ));
+
+function headDgn(){
 for i in \$( seq  0 30);
 do
 samaDgn+=\"=\";
-buka=\"\${samaDgn}( OUTPUT )\${samaDgn}\"
-tutup=\"\${samaDgn}==========\${samaDgn}\"
+bukaDgn=\"\${samaDgn}( OUTPUT )\${samaDgn}\"
+tutupDgn=\"\${samaDgn}==========\${samaDgn}\"
 done
+if [ \$1 == \"buka\" ];
+then
+echo \$bukaDgn;
+elif [ \$1 == \"tutup\" ];
+then
+echo \$tutupDgn;
+fi
+unset samaDgn;
+}
 
 listWitnet(){
 echo \"===List Container===\" 
@@ -48,14 +59,14 @@ if [ \$1 == \"\${i}\" ];
 then
 cont=\${listCont[\$((i-1))]};
 twitAddr=\$( witnetd_cli  address | grep twit | head -1 );
-echo \$buka;
+headDgn buka;
 witnetd_cli \${@:2}
 fi
 done
 if [[ ! \"\$1\" =~ ^[1-9]{1}+\$ ]];
 then
 listWitnet;
-echo \$buka;
+headDgn buka;
 witnetd_cli \${@:1}
 fi
 }
@@ -67,13 +78,15 @@ echo \" Successfully stop \${cont}\";
 command sudo docker rm \$cont;
 echo \" Successfully remove \${cont}\";
 sudo rm -rf ~/.witnet/storage
+headDgn tutup;
 source $userSource
 elif [ \$1 == \"logs\" ];
 then
 command sudo docker logs -f \$cont;
+headDgn tutup;
 else
 command sudo docker exec \$cont /tmp/witnet-raw -c /tmp/testnet-1/witnet.toml node \${@:1} 2>/dev/null
-echo \$tutup
+headDgn tutup;
 source $userSource;
 fi
 }
@@ -84,14 +97,21 @@ totalCont=${#listCont[@]};
 
 #install witnet
 function witnetInstall(){
-command sudo docker run -d --name witnet${totalCont}_node \
-      --volume ~/.witnet:/.witnet \
-      --publish $((21337 + $totalCont )):$(( 21337 + $totalCont )) \
-      --restart always witnet/witnet-rust:2.0.0-rc.9 \
-      -c /tmp/testnet-1/witnet.toml node server
+command sudo docker run --name witnet${currWit}_node \
+	--runtime runc -v /home/user/.witnet:/.witnet \
+    -p $(( 21337 + totalCont )):$(( 21337 + totalCont ))/tcp 
+    --restart always -h 6223e55e2e58 --expose $(( 11212 + totalCont ))/tcp \
+    --expose $(( 21337 + totalCont ))/tcp \
+    --expose $(( 21338 + totalCont ))/tcp \
+    -l org.opencontainers.image.ref.name='ubuntu' \
+    -l org.opencontainers.image.version='22.04' \
+    -e 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' \
+    -e 'RUST_BACKTRACE=full' \
+    -d --entrypoint "./runner.sh" witnet/witnet-rust:2.0.0-rc.9 '-c' '/tmp/testnet-1/witnet.toml' 'node' 'server'
 }
+
 witnetInstall
-listCommand="List command :\n 1. witnetd ${totalCont} nodeStats\n2. witnetd ${totalCont} balance\n3. witnetd ${totalCont} reputation" 
+listCommand="List command :\n 1. witnetd $(( 1+ totalCont )) nodeStats\n2. witnetd $(( 1 + totalCont )) balance\n3. witnetd $(( 1+ totalCont )) reputation" 
 echo -e "Finished ✓\n${listCommand} ";
 source $userSource;
 
