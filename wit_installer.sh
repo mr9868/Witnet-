@@ -53,7 +53,7 @@ fi
 done
 }
 witnetd(){
-if [ \${#listCont[@]} -gt 0 ];
+if [ \${#listCont[@]} -eq 0 ];
 then
 echo \"No witnet container name found !\";
 fi
