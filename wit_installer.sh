@@ -67,14 +67,14 @@ echo \" Successfully stop \${cont}\";
 command sudo docker rm \$cont;
 echo \" Successfully remove \${cont}\";
 sudo rm -rf ~/.witnet/storage
-source ~/.bashrc
+source $userSource
 elif [ \$1 == \"logs\" ];
 then
 command sudo docker logs -f \$cont;
 else
 command sudo docker exec \$cont /tmp/witnet-raw -c /tmp/testnet-1/witnet.toml node \${@:1} 2>/dev/null
 echo \$tutup
-source ~/.bashrc;
+source $userSource;
 fi
 }
 " >> $userSource
@@ -93,6 +93,6 @@ command sudo docker run -d --name witnet${totalCont}_node \
 witnetInstall
 listCommand="List command :\n 1. witnetd ${totalCont} nodeStats\n2. witnetd ${totalCont} balance\n3. witnetd ${totalCont} reputation" 
 echo -e "Finished ✓\n${listCommand} ";
-source ~/.bashrc;
+source $userSource;
 
 
