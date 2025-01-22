@@ -61,7 +61,7 @@ fi
 witnetd_cli(){
 if [ \$1 == \"remove\" ];
 then
-command sudo docker stop \$cont && command sudo docker rm \$cont && rm -rf ~/.witnet/storage
+command sudo docker stop \$cont && command sudo docker rm \$cont && sudo rm -rf ~/.witnet/storage
 elif [ \$1 == \"logs\" ];
 then
 command sudo docker logs -f \$cont;
