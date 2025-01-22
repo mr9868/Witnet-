@@ -99,7 +99,7 @@ totalCont=${#listCont[@]};
 function witnetInstall(){
 command sudo docker run --name witnet${currWit}_node \
 	--runtime runc -v /home/user/.witnet:/.witnet \
-    -p $(( 21337 + totalCont )):$(( 21337 + totalCont ))/tcp 
+    -p $(( 21337 + totalCont )):$(( 21337 + totalCont ))/tcp \
     --restart always -h 6223e55e2e58 --expose $(( 11212 + totalCont ))/tcp \
     --expose $(( 21337 + totalCont ))/tcp \
     --expose $(( 21338 + totalCont ))/tcp \
